@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Registration</title>
+    <style>
+        /* Global Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.9);
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            width: 60%;
+            height: 60%;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        /* Login (Form) Container */
+        .login {
+            flex: 1;
+            background-color: rgba(28, 28, 60, 0.9);
+            padding: 30px;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+        .login h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        /* Form Wrapper */
+        .form-wrapper {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 5px;
+            width: 80%;
+            margin: 0 auto;
+        }
+        .form-wrapper input[type="text"],
+        .form-wrapper input[type="email"],
+        .form-wrapper input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            background-color: #eeeeef;
+            border: none;
+            border-radius: 5px;
+        }
+        /* Button Container */
+        .button-container {
+            display: flex;
+            justify-content: space-between; /* Space between buttons */
+            align-items: center;
+            margin-top: 20px;
+        }
+        /* Buttons */
+        .button-container button {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid #FFF;
+            border-radius: 5px;
+            padding: 10px 15px;
+            color: #fff;
+            font-size: 14px;
+            transition: 0.2s all ease-in-out;
+            cursor: pointer;
+            flex: 1; /* Makes buttons equal width */
+            margin: 0 5px; /* Adds spacing between buttons */
+        }
+        .button-container button:hover {
+            color: #9526a9;
+            background-color: #fff;
+        }
+        /* Register Container */
+        .register {
+            flex: 1;
+            background-color: rgba(28, 28, 60, 0.4);
+            padding: 50px;
+            text-align: center;
+            color: white;
+
+        }
+        .register h1 {
+            font-size: 35px;
+            margin-bottom: 22px;
+            font-weight: bold;
+        }
+        .welcome_container {
+            background-color: rgba(28, 28, 60, 0.6);
+            margin-top: 30px;
+            border-radius: 5px;
+            padding: 20px;
+        }
+        .welcome_container h2 {
+            font-size: 28px;
+            color: #1E90FF;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Login Section (Form) -->
+    <div class="login">
+        <h1>Admin Registration</h1>
+        <div class="form-wrapper">
+            <form>
+                {% csrf_token %}
+                <input type="text" placeholder="Enter firstname" name="first_name" required><br>
+                <input type="text" placeholder="Enter lastname" name="last_name" required><br>
+                <input type="text" placeholder="Enter username" name="user_name" required><br>
+                <input type="email" placeholder="Enter email" name="email" required><br>
+                <input type="password" placeholder="Enter password" name="psw" required><br>
+            </form>
+        </div>
+        <!-- Button container with flexbox -->
+        <div class="button-container">
+            <button type="button">Back</button>
+            <button type="button" onclick="window.location.href='{% url 'create_account' %}'">Create Account</button>
+        </div>
+    </div>
+
+    <!-- Register Section -->
+    <div class="register">
+        <h1>Hello Admin</h1>
+        <div class="welcome_container">
+            <h2 id="welcomeText"></h2>
+            <p>Start your journey by managing users, monitoring activities, and maintaining the content flow.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    const text = "Welcome to E Learning";
+    let index = 0;
+    const speed = 100; // Speed of the animation in milliseconds
+    const welcomeText = document.getElementById('welcomeText');
+
+    function typeText() {
+        if (index < text.length) {
+            welcomeText.innerHTML += text.charAt(index);
+            index++;
+            setTimeout(typeText, speed);
+        }
+    }
+
+    // Start typing effect when the page loads
+    window.onload = function() {
+        typeText();
+    };
+</script>
+
+</body>
+</html>
